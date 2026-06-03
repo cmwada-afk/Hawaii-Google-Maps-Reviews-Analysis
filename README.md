@@ -1,4 +1,4 @@
-# What Makes a Successful Business in Hawaii? 
+# Successful Businesses in Hawaii Analysis
 
 **By Chase Wada**
 

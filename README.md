@@ -6,22 +6,22 @@
 
 ## Introduction
 
-This project analyzes Google Maps reviews of businesses in Hawaii to answer the question: **Do food-related businesses receive higher average ratings than non-food-related businesses in Hawaii?**
+In this project, I analyzed Google Maps reviews of businesses in Hawaii to help answer the question: **What factors are associated with successful businesses in Hawaii?**
 
-Hawaii is one of the most popular tourist destinations in the U.S., meaning there are lots of different businesses varying from stores, hotels, restaurants, etc. Understanding what makes a business successful is valuable for entrepreneurs looking to open a business in Hawaii.
+Hawaii is one of the most popular tourist destinations in the United States, meaning there are lots of different businesses, varying from stores, hotels, restaurants, etc. For the analysis of this dataset, business success is defined as their average rating received on Google Maps; represented by `avg_rating` in the dataset, which shows customer satisfaction. 
+ 
+The focus question of this analysis is **Do food-related businesses receive higher average ratings than non-food-related businesses in Hawaii?** This question is important because people looking to open a business in Hawaii or other tourist destinations may want to understand why some types of businesses earn better customer ratings.
 
-Business success is defined as a high average rating (`avg_rating`) on Google Maps, which reflects customer satisfaction.
-
-The dataset contains **21,507 businesses** and **1,504,347 reviews**.
+This dataset contains **21,507 businesses** and **1,504,347 reviews**.
 
 Relevant columns:
 
 | Column | Description |
 |---|---|
-| `avg_rating` | Average star rating of a business (1–5 stars) |
+| `avg_rating` | Average rating of a business(1-5 stars) |
 | `num_of_reviews` | Total number of reviews |
-| `category` | Business category (e.g. Restaurant, Recreation center) |
-| `price` | Price level (None, $, $$, $$$) |
+| `category` | Business category(ex: Recreation center, Restaurant) |
+| `price` | Price level ($, $$, $$$) |
 | `latitude` / `longitude` | Geographic location of the business |
 
 ---

@@ -132,13 +132,13 @@ From the test on the model, the RMSE that was achieved is 0.4447. This means tha
 
 ## Final Model
 
-For the final model, I added two more new engineered features: `log_reviews` (quantitative): logarithm of num_of_reviews and `lat_lon_interaction`(quantitative): the product of latitude and longitude.
+For the final model, I added two more new engineered features: `log_reviews` (quantitative): logarithm of `num_of_reviews` and `dist_to_ala_moana`(quantitative): the distance from each business to Ala Moana mall, one of the biggest tourist destinations in Hawaii. 
 
 I added the `log_reviews` feature because we saw from earlier in step 2, that the distribution of `num_of_reviews` is heavily right skewed; meaning most of the businesses have very small number of reviews while some businesses have over 500. This log transform helps fix the skew, where taking the log, reduces the influence of higher number of review businesses to help better represent the relationship between the number of reviews and ratings without getting dominated by outliers(focusing on less reviews).
 
-I added the `lat_lon_interaction` feature because there are certain geographic location within Hawaii, like tourist cities like Waikiki, may be associated with higher or lower ratings because of the amount of people visiting. Different locations within Hawaii, can bring in different customers to a variety of different types of businesses. By multiplying both the latitude and longitude together, it creates a single feature that helps show the location based effect on the ratings.
+I added the `dist_to_ala_moana` feature, as a way to measure the straight line distance from the business to the Ala Moana center in Waikiki. Ala Moana is right in the middle of Hawaii's biggest tourist city, I believed that businesses that were closer to Ala Moana, would have more customer consumption, as way more people on the day to day basis will walk by these businesses. I think that the distance from Ala Moana, more specifically tourist cities, could influence the business's ratings.
 
-For the final model I used a Random Forest Regressor, which improves from the baseline Linear Regression model by capturing some of the non-linear relationships between features and ratings.
+For the final model I used a Random Forest Regressor, which improves from the baseline Linear Regression model by capturing some of the non-linear relationships between features and ratings. 
 
 The features I used are:
 
@@ -146,7 +146,7 @@ The features I used are:
 
 -`log_reviews` (quantitative, engineered)
 
--`lat_lon_interaction` (quantitative, engineered)
+-`dist_to_ala_moana` (quantitative, engineered)
 
 -`latitude` (quantitative)
 
@@ -165,14 +165,14 @@ To improve the final model performance, I used GridSearchCV to help tune the Ran
 
 Final Model Results:
 
-The best hyperparameters that I found were `n_estimators`=50 and `max_depth`=5.
+The best hyperparameters that I found were `n_estimators`=100 and `max_depth`=5.
 
 Baseline RMSE: 0.4447
-Final Model RMSE: 0.4189
-Improvement: 0.0258
-The final model achieved a RMSE of 0.4189, while the original baseline model had a RMSE of 0.4447. This means that the final model improved by about 0.0258 stars(rating).
+Final Model RMSE: 0.4174
+Improvement: 0.0273
+The final model achieved a RMSE of 0.4174, while the original baseline model had a RMSE of 0.4447. This means that the final model improved by about 0.0273 stars(rating).
 
-We can see that the final model ended up performing better than the baseline model because it added additional information(`log_reviews` and `lat_lon_interaction`) about possible review trends and the businesses' locations. The final model also used a more flexible machine learning algorithm that is capable of capturing the nonlinear relationships between business features and the customer ratings, which was not able to be done in the baseline. The Random Forest Regressor ended up performing better than the Linear Regression model because it was able to capture and show the non-linear relationships between features and ratings. The engineered features `log_reviews` and `lat_lon_interaction` helped the final model better understand the review volume and frequency patterns; and the geographic location effects on business ratings.
+We can see that the final model ended up performing better than the baseline model because it added additional information(`log_reviews` and `dist_to_ala_moana`) about possible review trends and the businesses' locations. My final model also uses a more flexible machine learning algorithm that is capable of capturing more nonlinear relationships between business features and the customer ratings, which was not able to be done in the original baseline model. The Random Forest Regressor ended up performing better than the Linear Regression model because it was able to capture and show the non-linear relationships between features and ratings. The engineered features `log_reviews` and `dist_to_ala_moana` helped the final model better understand the review volume and frequency patterns; and the geographic location effects on business ratings.
 
 ---
 

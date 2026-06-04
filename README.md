@@ -58,7 +58,7 @@ From the box plot, non-food-related businesses have slightly higher average rati
 
 <iframe src="assets/reviews_vs_rating.html" width="800" height="500" frameborder="0"></iframe>
 
-From the scatterplot, we see the relationship between the number of reviews and average ratings of businesses. The businesses with less reviews have a much wider range of ratings(1-5 stars), while the businesses with a higher number of reviews mainly receive ratings between 4 and 5 stars(much higher). This indicates that businesses with a higher number of reviews tend to receive higher ratings.
+From the scatterplot, we see the relationship between the number of reviews and average ratings of businesses. The businesses with less reviews have a much wider range of ratings(1-5 stars), while the businesses with a higher number of reviews mainly receive ratings between 4 and 5 stars(much higher). This helps show that the businesses that have a higher number of reviews, typically seem to have consistently high ratings; while businesses that have fewer reviews have a wide range of ratings.
 
 **Interesting Aggregates:**
 

@@ -181,11 +181,17 @@ We can see that the final model ended up performing better than the baseline mod
 For the fairness analysis I will analyze whether the final model that I performed in step 7, performs equally well for food-related businesses compared to non-food related businesses, because this was the main question that influenced my project.
 
 Group X: Food-related businesses (is_restaurant = True)
+
 Group Y: Non-food related businesses (is_restaurant = False)
+
 Evaluation Metric: RMSE
+
 Null Hypothesis: The model is fair. The RMSE for food-related and non-food related businesses are roughly the same, and any differences are due to random chance.
+
 Alternative Hypothesis: The model is unfair. The RMSE for food-related businesses is significantly different from the RMSE for non-food related businesses.
+
 Significance Level: 0.05
+
 Test Statistic: Difference in RMSE (food related RMSE - non-food related RMSE)
 
 <iframe src="assets/fairness.html" width="800" height="500" frameborder="0"></iframe>
@@ -197,4 +203,4 @@ RMSE for non-food related businesses: 0.4232
 Observed difference: -0.0070
 P-value: 0.8726
 
-The p-value (0.8726) is much greater than the significance level of 0.05, so we fail to reject the null hypothesis. There is no significant evidence that the final model performs differently for food-related vs non-food related businesses. This means the model appears to be fair across both groups.
+The p-value (0.8726) is much greater than the significance level of 0.05, so we fail to reject the null hypothesis. There is no significant evidence that the final model performs differently for food-related vs non-food related businesses. This means that the model appears to be fair across both groups.

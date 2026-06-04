@@ -124,7 +124,9 @@ The evaluation metric I would use is the Root Mean Squared Error(RMSE), and I ch
 
 ## Baseline Model
 
-The baseline model uses linear regression, using the features: num_of_reviews(quantitative, passthrough), is_restaurant(nominal, one-hot encoded), and price (nominal, one-hot encoded), where the steps were implemented in a sklearn pipeline. From the test on the model, the RMSE that was calculated is 0.4447. This means that the model was not that effective at predicting the businesses' ratings because the RMSE means it was wrong on average by about 0.45 stars. Being this off on a scale between 1 and 5 stars is not that effective, but since only 3 features were used on this linear regression model, there were limits to the predictions. There is a lot of improvements that are needed to be made in step 7, possibly adding more features or a different model.
+For my baseline model, I used a Linear Regression model to predict a business's average Google Maps rating (avg_rating), using the features: num_of_reviews(quantitative, passthrough), is_restaurant(nominal, one-hot encoded), and price (ordinal, one-hot encoded), where the steps were implemented in a sklearn pipeline. 
+
+From the test on the model, the RMSE that was achieved is 0.4447. This means that the model was not that effective at predicting the businesses' ratings because the model's predictions were wrong by about 0.45 stars on average. Being wrong by about 0.5 stars on a scale between 1 and 5 stars is not that effective, so I don't believe that this model is that effective. Since the model only used 3 features on this linear regression model, there were limits to the predictions that do not let it effectively capture the factors that influence a business's ratings. There is a lot of improvements that are needed to be made in step 7, possibly adding more features or using a different model.
 
 ---
 

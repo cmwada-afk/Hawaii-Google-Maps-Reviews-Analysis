@@ -94,7 +94,7 @@ Second test(`price_missing` vs `name_missing`):
 Null Hypothesis: The distribution of `name_missing` is the same whether `price` is missing or not missing.
 Alternative Hypothesis: The distribution of `name_missing` is different based on whether the `price` is missing.
 
-The p-value= 0.601100, observed difference= 0.000229. We fail to reject the null hypothesis. The missingness of `price` IS NOT dependent on if the name variable is missing. The business name has nothing to do with the price missing, so it makes sense since these are unrelated features.
+The p-value=  0.595600, observed difference= 0.000229. We fail to reject the null hypothesis. The missingness of `price` IS NOT dependent on if the name variable is missing. The business name has nothing to do with the price missing, so it makes sense since these are unrelated features.
 
 ---
 
@@ -207,7 +207,7 @@ RMSE for non-food related businesses: 0.4248
 
 Observed difference: -0.0120
 
-P-value: 0.7899
+P-value: 0.7871
 
 
-The p-value (0.7899) is much greater than the significance level of 0.05, so we fail to reject the null hypothesis. There is no significant evidence that the final model performs differently for food-related vs non-food related businesses. This means that the model appears to be fair across both groups.
+The p-value (0.7871) is much greater than the significance level of 0.05, so we fail to reject the null hypothesis. There is no significant evidence that the final model performs differently for food-related vs non-food related businesses. This means that the model appears to be fair across both groups.

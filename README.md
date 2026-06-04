@@ -28,7 +28,7 @@ Relevant columns:
 
 ## Data Cleaning and Exploratory Data Analysis
 
-To set up the data for it to be analyzed correctly, I made an is_restaurant variable that helps identify food and non-food related businesses, based on the business's category. I also made sure to standardize the missing values of the dataset; specifically the price column as many businesses had None in that column. I replaced the None with with NaN, to represent actual missing values, and this cleaning of the data made it easier to compare the food and non-food related businesses.
+To set up the data for it to be analyzed correctly, I made an is_restaurant variable that helps identify food and non-food related businesses, based on the business's category. I also made sure to standardize the missing values of the dataset; specifically the price column as many businesses had None in that column. I replaced the None with NaN, to represent actual missing values, and this cleaning of the data made it easier to compare the food and non-food related businesses.
 
 **Cleaned DataFrame (first 5 rows):**
 
@@ -58,7 +58,7 @@ From the box plot, non-food-related businesses have slightly higher average rati
 
 <iframe src="assets/reviews_vs_rating.html" width="800" height="500" frameborder="0"></iframe>
 
-From the scatterplot, we see the relationship between the number of reviews and average ratings of businesses. The businesses with less reviews have a much wider range of ratings(1-5 stars), while the businesses with a higher numbers of reviews mainly receive ratings between 4 and 5 stars(much higher). This indicates that businesses with a higher number of reviews tend to receive higher ratings.
+From the scatterplot, we see the relationship between the number of reviews and average ratings of businesses. The businesses with less reviews have a much wider range of ratings(1-5 stars), while the businesses with a higher number of reviews mainly receive ratings between 4 and 5 stars(much higher). This indicates that businesses with a higher number of reviews tend to receive higher ratings.
 
 **Interesting Aggregates:**
 
@@ -99,7 +99,7 @@ Second test(price_missing vs name_missing): p-value= 0.601100, observed differen
 
 <iframe src="assets/hypothesis.html" width="800" height="500" frameborder="0"></iframe>
 
-I performed a permutation test with 10,000 simulations in order to generate an empirical distribution of the test statistic under the null hypothesis. The p-value I got was 1.0000, with an observed difference in mean ratings of -0.1226. This means that the food-related businesses, received lower average ratings than non-food related businesses which is the opposite of my alternative hypothesis. Since the p-value(1.0000) is much larger then my 0.05 significance level, we fail to reject the null hypothesis. There is not enough evidence to conclude that food-related businesses in Hawaii, receive higher average ratings than the non-food-related businesses in Hawaii.
+I performed a permutation test with 10,000 simulations in order to generate an empirical distribution of the test statistic under the null hypothesis. The p-value I got was 1.0000, with an observed difference in mean ratings of -0.1226. This means that the food-related businesses, received lower average ratings than non-food related businesses which is the opposite of my alternative hypothesis. Since the p-value(1.0000) is much larger then my 0.05 significance level, we fail to reject the null hypothesis. There is not enough evidence to conclude that food-related businesses in Hawaii, receive higher average ratings than the non-food-related businesses in Hawaii. I used the difference in mean ratings for the test statistic because the question is whether food-related businesses receive higher average ratings than the non-food-related businesses, so the difference is a great test statistic.
 
 ---
 
@@ -123,7 +123,7 @@ For the final model, I added two more new engineered features: log_reviews (quan
 
 I added the log_reviews feature because we saw from earlier in step 2, that the distribution of num_of_reviews is heavily right skewed; meaning most of the businesses have very small number of reviews while some businesses have over 500. This log transform helps fix the skew, where taking the log, reduces the influence of higher number of review businesses to help better represent the relationship between the number of reviews and ratings without getting dominated by outliers(focusing on less reviews).
 
-I added the lat_lon_interaction feature because there are certain geographic location within Hawaii, like tourist cities like Waikiki, may be associated with higher or lower ratings because of the amount of people visiting. Different locations within Hawaii, can bring in different customers to a variety of different types of businesses. By multiplying both the latitude and longitude togehter, it creates a single feature that helps show the location based effect on the ratings.
+I added the lat_lon_interaction feature because there are certain geographic location within Hawaii, like tourist cities like Waikiki, may be associated with higher or lower ratings because of the amount of people visiting. Different locations within Hawaii, can bring in different customers to a variety of different types of businesses. By multiplying both the latitude and longitude together, it creates a single feature that helps show the location based effect on the ratings.
 
 For the final model I used a Random Forest Regressor, which improves from the baseline Linear Regression model by capturing some of the non-linear relationships between features and ratings.
 

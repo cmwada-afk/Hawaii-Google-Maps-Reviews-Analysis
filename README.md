@@ -73,15 +73,17 @@ Non food-related businesses have a higher average rating (4.37 stars) compared t
 
 ## Assessment of Missingness
 
-The `price` column is likely **NMAR** (Not Missing At Random). Businesses may deliberately choose not to report their price level on Google Maps — perhaps because they don't want to signal that they are too expensive or too cheap. This missingness depends on the business's own decision, which we cannot observe in the data. Additional data such as business websites or menus could help explain this missingness, making it MAR.
+Several different columns in the data set have missing values but the price column is likely NMAR. Many of the different businesses may decide to not report their price level on Google Maps on purpose. A reason for this could be because businesses may not want customers to see the price level; too expensive which may scare customers away, or too cheap which may look like the restaurant has poor quality. This missingness is not random, most likely depending on the business's own decision, which we cannot see in this dataset. This means the price column is likely NMAR (Not Missing At Random).
+
+Other data that I could collect to determine if the price column was MAR, is to check other data posted on google maps, such as a website, menu, images, etc. as these could all help explain the missingness.
 
 **Missingness Dependency:**
 
 <iframe src="assets/missingness.html" width="800" height="500" frameborder="0"></iframe>
 
-- **Test 1** (price ~ avg_rating): p-value = 0.0000, observed difference = 0.1734. The missingness of `price` IS dependent on `avg_rating`.
-- **Test 2** (price ~ name_missing): p-value = 0.6008, observed difference = 0.000229. The missingness of `price` does NOT depend on whether `name` is missing.
+First test(price_missing vs avg_rating): p-value= 0.000000, observed difference= 0.173396. We reject the null hypothesis. The missingness of price IS dependent on avg_rating. Businesses that have missing prices on Google Maps tend to have higher average ratings than the businesses that report their price.
 
+Second test(price_missing vs name_missing): p-value= 0.601100, observed difference= 0.000229. We fail to reject the null hypothesis. The missingness of price IS NOT dependent on if the name variable is missing. The business name has nothing to do with the price missing, so it makes sense since these are unrelated features.
 ---
 
 ## Hypothesis Testing
@@ -90,13 +92,13 @@ The `price` column is likely **NMAR** (Not Missing At Random). Businesses may de
 
 **Alternative Hypothesis**: Food-related businesses in Hawaii have higher average ratings than non-food related businesses.
 
-**Test Statistic**: Difference in mean average ratings (food minus non-food)
+**Test Statistic**: Difference in mean average ratings between food and non food-related businesses in Hawaii (food - non-food)
 
 **Significance Level**: 5%
 
 <iframe src="assets/hypothesis.html" width="800" height="500" frameborder="0"></iframe>
 
-The p-value was 1.0000, with an observed difference of -0.1226. Since the p-value is much greater than 0.05, we fail to reject the null hypothesis. There is not enough evidence to conclude that food-related businesses receive higher ratings — in fact, they receive lower ratings on average.
+I performed a permutation test with 10,000 simulations in order to generate an empirical distribution of the test statistic under the null hypothesis. The p-value I got was 1.0000, with an observed difference in mean ratings of -0.1226. This means that the food-related businesses, received lower average ratings than non-food related businesses which is the opposite of my alternative hypothesis. Since the p-value(1.0000) is much larger then my 0.05 significance level, we fail to reject the null hypothesis. There is not enough evidence to conclude that food-related businesses in Hawaii, receive higher average ratings than the non-food-related businesses in Hawaii.
 
 ---
 

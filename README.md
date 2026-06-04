@@ -28,7 +28,7 @@ Relevant columns:
 
 ## Data Cleaning and Exploratory Data Analysis
 
-To clean the data, I created an `is_restaurant` column to identify food-related businesses based on their category. I also replaced `'None'` strings in the `price` column with actual `NaN` values to properly represent missing data.
+To set up the data for it to be analyzed correctly, I made an is_restaurant variable that helps identify food and non-food related businesses, based on the business's category. I also made sure to standardize the missing values of the dataset; specifically the price column as many businesses had None in that column. I replaced the None with with NaN, to represent actual missing values, and this cleaning of the data made it easier to compare the food and non-food related businesses.
 
 **Cleaned DataFrame (first 5 rows):**
 
@@ -44,21 +44,21 @@ To clean the data, I created an `is_restaurant` column to identify food-related 
 
 <iframe src="assets/avg_rating_dist.html" width="800" height="500" frameborder="0"></iframe>
 
-Most businesses in Hawaii receive ratings between 4 and 5 stars, showing that customers generally have positive experiences. Very few businesses receive ratings below 3 stars.
+The histogram distribution of average business ratings is mainly between 4 and 5 stars. This shows that most businesses in Hawaii typically receive good reviews and positive feedback from customers, while almost no businesses receive ratings that are below 3 stars.
 
 <iframe src="assets/num_reviews_dist.html" width="800" height="500" frameborder="0"></iframe>
 
-The distribution of review counts is heavily right-skewed. Most businesses have relatively few reviews, while a small number have extremely large review counts.
+From the histogram, we see how the number of reviews are strongly right-skewed, meaning the majority of businesses have relatively less reviews. Some businesses have a lot of reviews(over 500 reviews), but were removed from the graph to help the visualization be more clear.
 
 **Bivariate Analysis:**
 
 <iframe src="assets/food_vs_nonfood.html" width="800" height="500" frameborder="0"></iframe>
 
-Non-food businesses have slightly higher average ratings than food-related businesses, which was surprising given my initial expectation.
+From the box plot, non-food-related businesses have slightly higher average ratings than the food-related businesses. This observation is not what I originally expected because I initially thought that restaurants and food-related businesses tend to receive higher ratings.
 
 <iframe src="assets/reviews_vs_rating.html" width="800" height="500" frameborder="0"></iframe>
 
-Businesses with more reviews tend to have higher and more stable ratings, suggesting that established businesses perform better.
+From the scatterplot, we see the relationship between the number of reviews and average ratings of businesses. The businesses with less reviews have a much wider range of ratings(1-5 stars), while the businesses with a higher numbers of reviews mainly receive ratings between 4 and 5 stars(much higher). This indicates that businesses with a higher number of reviews tend to receive higher ratings.
 
 **Interesting Aggregates:**
 
@@ -67,7 +67,7 @@ Businesses with more reviews tend to have higher and more stable ratings, sugges
 | False | 4.37 | 114.12 | 17070 |
 | True | 4.25 | 262.23 | 4437 |
 
-Food-related businesses receive more reviews on average (262 vs 114) but have lower average ratings (4.25 vs 4.37).
+Non food-related businesses have a higher average rating (4.37 stars) compared to food-related businesses (4.25 stars). Even though the food-related businesses receive a higher average number of reviews(262 reviews vs 114 reviews), they still receive lower average ratings. This shows how the restaurants and food-related businesses are reviewed by customers more often, but don't always receive better ratings. This observation is what led me to the hypothesis test that was done Step 4 of the project.
 
 ---
 

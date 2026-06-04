@@ -79,11 +79,22 @@ Other data that I could collect to determine if the price column was MAR, is to 
 
 **Missingness Dependency:**
 
+To test missingness dependency, I will test to see if the missingness of the price column depends on other variables. I performed two permutation tests on 2 different columns, avg_rating and name_missing.
+
+First test(price_missing vs avg_rating):
+Null Hypothesis: The distribution of avg_rating is the same whether price is missing or not missing.
+Alternative Hypothesis: The distribution of avg_rating is different based on whether the price is missing.
+
 <iframe src="assets/missingness.html" width="800" height="500" frameborder="0"></iframe>
 
 First test(price_missing vs avg_rating): p-value= 0.000000, observed difference= 0.173396. We reject the null hypothesis. The missingness of price IS dependent on avg_rating. Businesses that have missing prices on Google Maps tend to have higher average ratings than the businesses that report their price.
 
-Second test(price_missing vs name_missing): p-value= 0.601100, observed difference= 0.000229. We fail to reject the null hypothesis. The missingness of price IS NOT dependent on if the name variable is missing. The business name has nothing to do with the price missing, so it makes sense since these are unrelated features.
+
+Second test(price_missing vs name_missing):
+Null Hypothesis: The distribution of name_missing is the same whether price is missing or not missing.
+Alternative Hypothesis: The distribution of name_missing is different based on whether the price is missing.
+
+The p-value= 0.601100, observed difference= 0.000229. We fail to reject the null hypothesis. The missingness of price IS NOT dependent on if the name variable is missing. The business name has nothing to do with the price missing, so it makes sense since these are unrelated features.
 
 ---
 

@@ -84,6 +84,7 @@ Other data that I could collect to determine if the price column was MAR, is to 
 First test(price_missing vs avg_rating): p-value= 0.000000, observed difference= 0.173396. We reject the null hypothesis. The missingness of price IS dependent on avg_rating. Businesses that have missing prices on Google Maps tend to have higher average ratings than the businesses that report their price.
 
 Second test(price_missing vs name_missing): p-value= 0.601100, observed difference= 0.000229. We fail to reject the null hypothesis. The missingness of price IS NOT dependent on if the name variable is missing. The business name has nothing to do with the price missing, so it makes sense since these are unrelated features.
+
 ---
 
 ## Hypothesis Testing
@@ -104,71 +105,69 @@ I performed a permutation test with 10,000 simulations in order to generate an e
 
 ## Framing a Prediction Problem
 
-**Prediction Problem**: Predict a business's `avg_rating` based on available features.
+For the prediction problem my model will try to predict a business's average Google Maps rating(avg_rating), based on the different features that are available about the business such as location, number of reviews, etc. This will be a regression type problem, because avg_rating is the response variable, and it is a continuous variable that is always between 1 and 5 stars for the rating. avg_rating is the response variable that I chose because it directly measures the customers satisfaction and success because people leave the reviews when they feel strong about their opinion. The main focus of this project is the success of each business and predicting the ratings of the businesses can help us figure out the business features that are associated with higher customer satisfaction.
 
-**Type**: Regression — `avg_rating` is continuous (1–5 stars).
-
-**Response Variable**: `avg_rating` — directly measures customer satisfaction and business success.
-
-**Evaluation Metric**: RMSE — chosen over MAE because it penalizes larger errors more heavily, which matters when predicting ratings on a 1–5 scale.
-
-**Features used**: `num_of_reviews`, `is_restaurant`, `price`, `latitude`, `longitude` — all known before a customer visits the business.
+The evaluation metric I would use is the Root Mean Squared Error(RMSE), and I chose this over Mean Absolute Error(MAE), because the RMSE is more sensitive to outliers, meaning it will heavily penalize the bigger prediction errors calculated. This matters way more when we are trying to predict the average ratings of businesses because since the ratings are between 1-5 stars, a prediction that is off by 2 stars is super wrong, and needs to be penalized more then being off by 0.3 stars. The RMSE also will measure the prediction error in the same units as the response variable(1-5 stars) which is effective when solving a regression problem. The features are the number of reviews(num_of_reviews), category(is_restaurant), the price level(price), and the location geographically(latitude & longitude). I chose these features because when solving the predictions, it only makes sense to use features that would be available to use when predicting a business's ratings, and not features that are made after a customer visits a business.
 
 ---
 
 ## Baseline Model
 
-The baseline model uses **Linear Regression** with three features:
-- `num_of_reviews` (quantitative, passthrough)
-- `is_restaurant` (nominal, one-hot encoded)
-- `price` (nominal, one-hot encoded)
-
-All steps were implemented in a single sklearn Pipeline.
-
-**Baseline RMSE: 0.4447**
-
-This model is not particularly good — being off by 0.44 stars on a 1–5 scale is a moderate error. There is significant room for improvement.
+The baseline model uses linear regression, using the features: num_of_reviews(quantitative, passthrough), is_restaurant(nominal, one-hot encoded), and price (nominal, one-hot encoded), where the steps were implemented in a sklearn pipeline. From the test on the model, the RMSE that was calculated is 0.4447. This means that the model was not that effective at predicting the businesses' ratings because the RMSE means it was wrong on average by about 0.45 stars. Being this off on a scale between 1 and 5 stars is not that effective, but since only 3 features were used on this linear regression model, there were limits to the predictions. There is a lot of improvements that are needed to be made in step 7, possibly adding more features or a different model.
 
 ---
 
 ## Final Model
 
-The final model uses a **Random Forest Regressor** with two engineered features:
+For the final model, I added two more new engineered features: log_reviews (quantitative): logarithm of num_of_reviews and lat_lon_interaction(quantitative): the product of latitude and longitude.
 
-- `log_reviews`: Log transform of `num_of_reviews` — fixes the right skew in review counts so the model isn't dominated by outliers.
-- `lat_lon_interaction`: Product of latitude and longitude — captures location-specific effects on ratings, such as tourist-heavy areas like Waikiki.
+I added the log_reviews feature because we saw from earlier in step 2, that the distribution of num_of_reviews is heavily right skewed; meaning most of the businesses have very small number of reviews while some businesses have over 500. This log transform helps fix the skew, where taking the log, reduces the influence of higher number of review businesses to help better represent the relationship between the number of reviews and ratings without getting dominated by outliers(focusing on less reviews).
 
-**Hyperparameter tuning** via GridSearchCV (3-fold CV):
-- Best `n_estimators`: 50
-- Best `max_depth`: 5
+I added the lat_lon_interaction feature because there are certain geographic location within Hawaii, like tourist cities like Waikiki, may be associated with higher or lower ratings because of the amount of people visiting. Different locations within Hawaii, can bring in different customers to a variety of different types of businesses. By multiplying both the latitude and longitude togehter, it creates a single feature that helps show the location based effect on the ratings.
 
-| Model | RMSE |
-|---|---|
-| Baseline (Linear Regression) | 0.4447 |
-| Final (Random Forest) | 0.4189 |
-| Improvement | 0.0258 |
+For the final model I used a Random Forest Regressor, which improves from the baseline Linear Regression model by capturing some of the non-linear relationships between features and ratings.
 
-The Random Forest improved over Linear Regression by capturing non-linear relationships between features and ratings.
+The features I used are num_of_reviews (quantitative), log_reviews (quantitative, engineered), lat_lon_interaction (quantitative, engineered), latitude (quantitative), longitude (quantitative), is_restaurant (nominal, one-hot encoded), and price (nominal, one-hot encoded).
+
+I used StandardScaler on quantitative features, and OneHotEncoder on the categorical features. All of the preprocessing and model training steps were implemented within a single sklearn Pipeline.
+
+To improve the final model performance, I used GridSearchCV to help tune the Random Forest hyperparameters. The hyperparameters tested were:
+
+n_estimators: [50, 100] — controls number of trees in the forest
+max_depth: [5, 10, None] — controls how deep each tree can grow
+
+Final Model Results:
+
+The best hyperparameters that I found were n_estimators=50 and max_depth=5.
+
+Baseline RMSE: 0.4447
+Final Model RMSE: 0.4189
+Improvement: 0.0258
+The final model achieved a RMSE of 0.4189, while the original baseline model had a RMSE of 0.4447. This means that the final model improved by about 0.0258 stars(rating).
+
+We can see that the final model ended up performing better than the baseline model because it added additional information(log_reviews and lat_lon_interaction) about possible review trends and the businesses' locations. The final model also used a more flexible machine learning algorithm that is capable of capturing the nonlinear relationships between business features and the customer ratings, which was not able to be done in the baseline. The Random Forest Regressor ended up performing better than the Linear Regression model because it was able to capture and show the non-linear relationships between features and ratings. The engineered features log_reviews and lat_lon_interaction helped the final model better understand the review volume and frequency patterns; and the geographic location effects on business ratings.
 
 ---
 
 ## Fairness Analysis
 
-**Group X**: Food-related businesses (`is_restaurant = True`)
+For the fairness analysis I will analyze whether the final model that I performed in step 7, performs equally well for food-related businesses compared to non-food related businesses, because this was the main question that influenced my project.
 
-**Group Y**: Non-food businesses (`is_restaurant = False`)
-
-**Null Hypothesis**: The model is fair. RMSE for food and non-food businesses are roughly the same.
-
-**Alternative Hypothesis**: The model is unfair. RMSE for food businesses is higher.
-
-**Significance Level**: 0.05
+Group X: Food-related businesses (is_restaurant = True)
+Group Y: Non-food related businesses (is_restaurant = False)
+Evaluation Metric: RMSE
+Null Hypothesis: The model is fair. The RMSE for food-related and non-food related businesses are roughly the same, and any differences are due to random chance.
+Alternative Hypothesis: The model is unfair. The RMSE for food-related businesses is significantly different from the RMSE for non-food related businesses.
+Significance Level: 0.05
+Test Statistic: Difference in RMSE (food related RMSE - non-food related RMSE)
 
 <iframe src="assets/fairness.html" width="800" height="500" frameborder="0"></iframe>
 
-- RMSE food businesses: 0.4162
-- RMSE non-food businesses: 0.4232
-- Observed difference: -0.0070
-- **P-value: 0.8726**
+Fairness Results:
 
-Since p-value (0.8726) > 0.05, we fail to reject the null hypothesis. The model appears to be fair across both groups.
+RMSE for food related businesses: 0.4162
+RMSE for non-food related businesses: 0.4232
+Observed difference: -0.0070
+P-value: 0.8726
+
+The p-value (0.8726) is much greater than the significance level of 0.05, so we fail to reject the null hypothesis. There is no significant evidence that the final model performs differently for food-related vs non-food related businesses. This means the model appears to be fair across both groups.

@@ -10,7 +10,7 @@ In this project, I analyzed **Google Maps reviews of businesses in Hawaii** to h
 
 Hawaii is one of the most popular tourist destinations in the United States, meaning there are lots of different businesses, varying from stores, hotels, restaurants, etc.
 
-For the analysis of this dataset, business success is defined as their average rating received on Google Maps; represented by 'avg_rating' in the dataset, which shows customer satisfaction.
+For the analysis of this dataset, business success is defined as their average rating received on Google Maps; represented by `avg_rating` in the dataset, which shows customer satisfaction.
 
 This dataset contains **21,507 businesses** and **1,504,347 reviews**.
 
@@ -28,11 +28,11 @@ Relevant columns:
 
 ## Data Cleaning and Exploratory Data Analysis
 
-To set up the data for it to be analyzed correctly, I made an is_restaurant variable that helps identify food and non-food related businesses, based on the business's category. I also made sure to standardize the missing values of the dataset; specifically the price column as many businesses had None in that column. I replaced the None with NaN, to represent actual missing values, and this cleaning of the data made it easier to compare the food and non-food related businesses.
+To set up the data for it to be analyzed correctly, I made an `is_restaurant` variable that helps identify food and non-food related businesses, based on the business's category. I also made sure to standardize the missing values of the dataset; specifically the `price` column as many businesses had None in that column. I replaced the None with NaN, to represent actual missing values, and this cleaning of the data made it easier to compare the food and non-food related businesses.
 
 **Cleaned DataFrame (first 5 rows):**
 
-| name | category | avg_rating | num_of_reviews | price | is_restaurant |
+| `name` | `category` | `avg_rating` | `num_of_reviews` | `price` | `is_restaurant` |
 |---|---|---|---|---|---|
 | Hale Pops | [Restaurant] | 4.4 | 18 | None | True |
 | SMP - Single Marine Program | [Recreation center] | 4.1 | 18 | None | False |
@@ -62,7 +62,7 @@ From the scatterplot, we see the relationship between the number of reviews and 
 
 **Interesting Aggregates:**
 
-| is_restaurant | avg_rating | avg_reviews | count |
+| `is_restaurant` | `avg_rating` | `avg_reviews` | `count` |
 |---|---|---|---|
 | False | 4.37 | 114.12 | 17070 |
 | True | 4.25 | 262.23 | 4437 |
@@ -73,28 +73,28 @@ Non food-related businesses have a higher average rating (4.37 stars) compared t
 
 ## Assessment of Missingness
 
-Several different columns in the data set have missing values but the price column is likely NMAR. Many of the different businesses may decide to not report their price level on Google Maps on purpose. A reason for this could be because businesses may not want customers to see the price level; too expensive which may scare customers away, or too cheap which may look like the restaurant has poor quality. This missingness is not random, most likely depending on the business's own decision, which we cannot see in this dataset. This means the price column is likely NMAR (Not Missing At Random).
+Several different columns in the data set have missing values but the `price` column is likely NMAR. Many of the different businesses may decide to not report their price level on Google Maps on purpose. A reason for this could be because businesses may not want customers to see the price level; too expensive which may scare customers away, or too cheap which may look like the restaurant has poor quality. This missingness is not random, most likely depending on the business's own decision, which we cannot see in this dataset. This means the `price` column is likely NMAR (Not Missing At Random).
 
 Other data that I could collect to determine if the price column was MAR, is to check other data posted on google maps, such as a website, menu, images, etc. as these could all help explain the missingness.
 
 **Missingness Dependency:**
 
-To test missingness dependency, I will test to see if the missingness of the price column depends on other variables. I performed two permutation tests on 2 different columns, avg_rating and name_missing.
+To test missingness dependency, I will test to see if the missingness of the `price` column depends on other variables. I performed two permutation tests on 2 different columns, `avg_rating` and `name_missing`.
 
-First test(price_missing vs avg_rating):
-Null Hypothesis: The distribution of avg_rating is the same whether price is missing or not missing.
-Alternative Hypothesis: The distribution of avg_rating is different based on whether the price is missing.
+First test(`price_missing` vs `avg_rating`):
+Null Hypothesis: The distribution of `avg_rating` is the same whether `price` is missing or not missing.
+Alternative Hypothesis: The distribution of `avg_rating` is different based on whether the `price` is missing.
 
 <iframe src="assets/missingness.html" width="800" height="500" frameborder="0"></iframe>
 
-First test(price_missing vs avg_rating): p-value= 0.000000, observed difference= 0.173396. We reject the null hypothesis. The missingness of price IS dependent on avg_rating. Businesses that have missing prices on Google Maps tend to have higher average ratings than the businesses that report their price.
+First test(`price_missing` vs `avg_rating`): p-value= 0.000000, observed difference= 0.173396. We reject the null hypothesis. The missingness of `price` IS dependent on `avg_rating`. Businesses that have missing prices on Google Maps tend to have higher average ratings than the businesses that report their price.
 
 
-Second test(price_missing vs name_missing):
-Null Hypothesis: The distribution of name_missing is the same whether price is missing or not missing.
-Alternative Hypothesis: The distribution of name_missing is different based on whether the price is missing.
+Second test(`price_missing` vs `name_missing`):
+Null Hypothesis: The distribution of `name_missing` is the same whether `price` is missing or not missing.
+Alternative Hypothesis: The distribution of `name_missing` is different based on whether the `price` is missing.
 
-The p-value= 0.601100, observed difference= 0.000229. We fail to reject the null hypothesis. The missingness of price IS NOT dependent on if the name variable is missing. The business name has nothing to do with the price missing, so it makes sense since these are unrelated features.
+The p-value= 0.601100, observed difference= 0.000229. We fail to reject the null hypothesis. The missingness of `price` IS NOT dependent on if the name variable is missing. The business name has nothing to do with the price missing, so it makes sense since these are unrelated features.
 
 ---
 
@@ -116,15 +116,15 @@ I performed a permutation test with 10,000 simulations in order to generate an e
 
 ## Framing a Prediction Problem
 
-For the prediction problem my model will try to predict a business's average Google Maps rating(avg_rating), based on the different features that are available about the business such as location, number of reviews, etc. This will be a regression type problem, because avg_rating is the response variable, and it is a continuous variable that is always between 1 and 5 stars for the rating. avg_rating is the response variable that I chose because it directly measures the customers satisfaction and success because people leave the reviews when they feel strong about their opinion. The main focus of this project is the success of each business and predicting the ratings of the businesses can help us figure out the business features that are associated with higher customer satisfaction.
+For the prediction problem my model will try to predict a business's average Google Maps rating(`avg_rating`), based on the different features that are available about the business such as location, number of reviews, etc. This will be a regression type problem, because `avg_rating` is the response variable, and it is a continuous variable that is always between 1 and 5 stars for the rating. `avg_rating` is the response variable that I chose because it directly measures the customers satisfaction and success because people leave the reviews when they feel strong about their opinion. The main focus of this project is the success of each business and predicting the ratings of the businesses can help us figure out the business features that are associated with higher customer satisfaction.
 
-The evaluation metric I would use is the Root Mean Squared Error(RMSE), and I chose this over Mean Absolute Error(MAE), because the RMSE is more sensitive to outliers, meaning it will heavily penalize the bigger prediction errors calculated. This matters way more when we are trying to predict the average ratings of businesses because since the ratings are between 1-5 stars, a prediction that is off by 2 stars is super wrong, and needs to be penalized more then being off by 0.3 stars. The RMSE also will measure the prediction error in the same units as the response variable(1-5 stars) which is effective when solving a regression problem. At the time of prediction, the features are the current number of reviews(num_of_reviews), category(is_restaurant), the price level(price), and the location geographically(latitude & longitude). I chose these features because when solving the predictions, it only makes sense to use features that would be available to use when predicting a business's ratings, and not features that are made after a customer visits a business.
+The evaluation metric I would use is the Root Mean Squared Error(RMSE), and I chose this over Mean Absolute Error(MAE), because the RMSE is more sensitive to outliers, meaning it will heavily penalize the bigger prediction errors calculated. This matters way more when we are trying to predict the average ratings of businesses because since the ratings are between 1-5 stars, a prediction that is off by 2 stars is super wrong, and needs to be penalized more then being off by 0.3 stars. The RMSE also will measure the prediction error in the same units as the response variable(1-5 stars) which is effective when solving a regression problem. At the time of prediction, the features are the current number of reviews(`num_of_reviews`), category(`is_restaurant`), the price level(`price`), and the location geographically(`latitude` & `longitude`). I chose these features because when solving the predictions, it only makes sense to use features that would be available to use when predicting a business's ratings, and not features that are made after a customer visits a business.
 
 ---
 
 ## Baseline Model
 
-For my baseline model, I used a Linear Regression model to predict a business's average Google Maps rating (avg_rating), using the features: num_of_reviews(quantitative, passthrough), is_restaurant(nominal, one-hot encoded), and price (ordinal, one-hot encoded), where the steps were implemented in a sklearn pipeline. 
+For my baseline model, I used a Linear Regression model to predict a business's average Google Maps rating (`avg_rating`), using the features: `num_of_reviews`(quantitative, passthrough), `is_restaurant`(nominal, one-hot encoded), and `price` (ordinal, one-hot encoded), where the steps were implemented in a sklearn pipeline. 
 
 From the test on the model, the RMSE that was achieved is 0.4447. This means that the model was not that effective at predicting the businesses' ratings because the model's predictions were wrong by about 0.45 stars on average. Being wrong by about 0.5 stars on a scale between 1 and 5 stars is not that effective, so I don't believe that this model is that effective. Since the model only used 3 features on this linear regression model, there were limits to the predictions that do not let it effectively capture the factors that influence a business's ratings. There is a lot of improvements that are needed to be made in step 7, possibly adding more features or using a different model.
 
@@ -132,47 +132,47 @@ From the test on the model, the RMSE that was achieved is 0.4447. This means tha
 
 ## Final Model
 
-For the final model, I added two more new engineered features: log_reviews (quantitative): logarithm of num_of_reviews and lat_lon_interaction(quantitative): the product of latitude and longitude.
+For the final model, I added two more new engineered features: `log_reviews` (quantitative): logarithm of num_of_reviews and `lat_lon_interaction`(quantitative): the product of latitude and longitude.
 
-I added the log_reviews feature because we saw from earlier in step 2, that the distribution of num_of_reviews is heavily right skewed; meaning most of the businesses have very small number of reviews while some businesses have over 500. This log transform helps fix the skew, where taking the log, reduces the influence of higher number of review businesses to help better represent the relationship between the number of reviews and ratings without getting dominated by outliers(focusing on less reviews).
+I added the `log_reviews` feature because we saw from earlier in step 2, that the distribution of `num_of_reviews` is heavily right skewed; meaning most of the businesses have very small number of reviews while some businesses have over 500. This log transform helps fix the skew, where taking the log, reduces the influence of higher number of review businesses to help better represent the relationship between the number of reviews and ratings without getting dominated by outliers(focusing on less reviews).
 
-I added the lat_lon_interaction feature because there are certain geographic location within Hawaii, like tourist cities like Waikiki, may be associated with higher or lower ratings because of the amount of people visiting. Different locations within Hawaii, can bring in different customers to a variety of different types of businesses. By multiplying both the latitude and longitude together, it creates a single feature that helps show the location based effect on the ratings.
+I added the `lat_lon_interaction` feature because there are certain geographic location within Hawaii, like tourist cities like Waikiki, may be associated with higher or lower ratings because of the amount of people visiting. Different locations within Hawaii, can bring in different customers to a variety of different types of businesses. By multiplying both the latitude and longitude together, it creates a single feature that helps show the location based effect on the ratings.
 
 For the final model I used a Random Forest Regressor, which improves from the baseline Linear Regression model by capturing some of the non-linear relationships between features and ratings.
 
 The features I used are:
 
--num_of_reviews (quantitative) 
+-`num_of_reviews` (quantitative) 
 
--log_reviews (quantitative, engineered)
+-`log_reviews` (quantitative, engineered)
 
--lat_lon_interaction (quantitative, engineered)
+-`lat_lon_interaction` (quantitative, engineered)
 
--latitude (quantitative)
+-`latitude` (quantitative)
 
--longitude (quantitative)
+-`longitude` (quantitative)
 
--is_restaurant (nominal, one-hot encoded)
+-`is_restaurant` (nominal, one-hot encoded)
 
--price (ordinal, one-hot encoded).
+-`price` (ordinal, one-hot encoded).
 
 I used StandardScaler on quantitative features, and OneHotEncoder on the categorical features. All of the preprocessing and model training steps were implemented within a single sklearn Pipeline.
 
 To improve the final model performance, I used GridSearchCV to help tune the Random Forest hyperparameters. The hyperparameters tested were:
 
-n_estimators: [50, 100] — controls number of trees in the forest
-max_depth: [5, 10, None] — controls how deep each tree can grow
+`n_estimators`: [50, 100] — controls number of trees in the forest
+`max_depth`: [5, 10, None] — controls how deep each tree can grow
 
 Final Model Results:
 
-The best hyperparameters that I found were n_estimators=50 and max_depth=5.
+The best hyperparameters that I found were `n_estimators`=50 and `max_depth`=5.
 
 Baseline RMSE: 0.4447
 Final Model RMSE: 0.4189
 Improvement: 0.0258
 The final model achieved a RMSE of 0.4189, while the original baseline model had a RMSE of 0.4447. This means that the final model improved by about 0.0258 stars(rating).
 
-We can see that the final model ended up performing better than the baseline model because it added additional information(log_reviews and lat_lon_interaction) about possible review trends and the businesses' locations. The final model also used a more flexible machine learning algorithm that is capable of capturing the nonlinear relationships between business features and the customer ratings, which was not able to be done in the baseline. The Random Forest Regressor ended up performing better than the Linear Regression model because it was able to capture and show the non-linear relationships between features and ratings. The engineered features log_reviews and lat_lon_interaction helped the final model better understand the review volume and frequency patterns; and the geographic location effects on business ratings.
+We can see that the final model ended up performing better than the baseline model because it added additional information(`log_reviews` and `lat_lon_interaction`) about possible review trends and the businesses' locations. The final model also used a more flexible machine learning algorithm that is capable of capturing the nonlinear relationships between business features and the customer ratings, which was not able to be done in the baseline. The Random Forest Regressor ended up performing better than the Linear Regression model because it was able to capture and show the non-linear relationships between features and ratings. The engineered features `log_reviews` and `lat_lon_interaction` helped the final model better understand the review volume and frequency patterns; and the geographic location effects on business ratings.
 
 ---
 
@@ -180,9 +180,9 @@ We can see that the final model ended up performing better than the baseline mod
 
 For the fairness analysis I will analyze whether the final model that I performed in step 7, performs equally well for food-related businesses compared to non-food related businesses, because this was the main question that influenced my project.
 
-Group X: Food-related businesses (is_restaurant = True)
+Group X: Food-related businesses (`is_restaurant` = True)
 
-Group Y: Non-food related businesses (is_restaurant = False)
+Group Y: Non-food related businesses (`is_restaurant` = False)
 
 Evaluation Metric: RMSE
 

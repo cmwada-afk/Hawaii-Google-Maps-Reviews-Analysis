@@ -21,7 +21,7 @@ Relevant columns:
 | `avg_rating` | Average rating of a business(1-5 stars) |
 | `num_of_reviews` | Total number of reviews |
 | `category` | Business category(ex: Recreation center, Restaurant) |
-| `price` | Price level ($, $$, $$$) |
+| `price` | Price level  |
 | `latitude` / `longitude` | Geographic location of the business |
 
 ---

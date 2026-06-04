@@ -138,6 +138,9 @@ I added the `log_reviews` feature because we saw from earlier in step 2, that th
 
 I added the `dist_to_ala_moana` feature, as a way to measure the straight line distance from the business to the Ala Moana center in Waikiki. Ala Moana is right in the middle of Hawaii's biggest tourist city, I believed that businesses that were closer to Ala Moana, would have more customer consumption, as way more people on the day to day basis will walk by these businesses. I think that the distance from Ala Moana, more specifically tourist cities, could influence the business's ratings.
 
+Before finalizing on the `dist_to_ala_moana` feature, I originally tried to use some combination of the latitude and longitude features to get a location feature but I realized it wasn't a good measure because it didn't have anything to compare to. I decided to base the location off a big tourist destination as I thought that could be easier to figure out trends
+
+
 For the final model I used a Random Forest Regressor, which improves from the baseline Linear Regression model by capturing some of the non-linear relationships between features and ratings. 
 
 The features I used are:

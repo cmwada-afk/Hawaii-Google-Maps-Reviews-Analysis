@@ -198,9 +198,13 @@ Test Statistic: Difference in RMSE (food related RMSE - non-food related RMSE)
 
 Fairness Results:
 
-RMSE for food related businesses: 0.4162
-RMSE for non-food related businesses: 0.4232
-Observed difference: -0.0070
-P-value: 0.8726
+RMSE for food related businesses: 0.4128
 
-The p-value (0.8726) is much greater than the significance level of 0.05, so we fail to reject the null hypothesis. There is no significant evidence that the final model performs differently for food-related vs non-food related businesses. This means that the model appears to be fair across both groups.
+RMSE for non-food related businesses: 0.4248
+
+Observed difference: -0.0120
+
+P-value: 0.7899
+
+
+The p-value (0.7899) is much greater than the significance level of 0.05, so we fail to reject the null hypothesis. There is no significant evidence that the final model performs differently for food-related vs non-food related businesses. This means that the model appears to be fair across both groups.

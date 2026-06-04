@@ -141,12 +141,19 @@ I added the lat_lon_interaction feature because there are certain geographic loc
 For the final model I used a Random Forest Regressor, which improves from the baseline Linear Regression model by capturing some of the non-linear relationships between features and ratings.
 
 The features I used are:
+
 -num_of_reviews (quantitative) 
+
 -log_reviews (quantitative, engineered)
+
 -lat_lon_interaction (quantitative, engineered)
+
 -latitude (quantitative)
+
 -longitude (quantitative)
+
 -is_restaurant (nominal, one-hot encoded)
+
 -price (ordinal, one-hot encoded).
 
 I used StandardScaler on quantitative features, and OneHotEncoder on the categorical features. All of the preprocessing and model training steps were implemented within a single sklearn Pipeline.
